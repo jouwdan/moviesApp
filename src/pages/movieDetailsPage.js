@@ -1,4 +1,5 @@
 import React, {useState, useEffect}  from "react";
+import { getMovie, getMovieImages } from "../api/tmdb-api";
 import { useParams } from "react-router-dom";
 import MovieHeader from "../components/headerMovie/";
 import MovieDetails from "../components/movieDetails/";
@@ -26,28 +27,15 @@ const MoviePage = (props) => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .then((movie) => {
-        // console.log(movie)
-        setMovie(movie);
-      });
+    getMovie(id).then((movie) => {
+      setMovie(movie);
+    });
   }, [id]);
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}`
-    )
-      .then((res) => res.json())
-      .then((json) => json.posters)
-      .then((images) => {
-        // console,log(images)
-        setImages(images);
-      });
+    getMovieImages(id).then((images) => {
+      setImages(images);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
