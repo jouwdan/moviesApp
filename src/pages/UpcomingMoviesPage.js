@@ -21,7 +21,7 @@ const UpcomingMoviesPage = (props) => {
 
   return (
     <PageTemplate
-      title='Discover Movies'
+      title='Upcoming Movies'
       movies={movies}
       action={(movie) => {
         return <AddToMustWatchIcon movie={movie} />
