@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MovieCard({ movie }) {
+export default function MovieCard({ movie, action }) {
   const classes = useStyles();
   const { favourites, addToFavourites } = useContext(MoviesContext);
 
@@ -80,9 +80,7 @@ export default function MovieCard({ movie }) {
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-      <IconButton aria-label="add to favourites" onClick={handleAddToFavourite}>
-        <FavoriteIcon color="primary" fontSize="large" />
-    </IconButton>
+        {action(movie)}
         <Link to={`/movies/${movie.id}`}>
           <Button variant="outlined" size="medium" color="primary">
             More Info ...
